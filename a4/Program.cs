@@ -24,7 +24,7 @@ internal class Program
         
 
         stat = StatistikBerechnen(data1);
-        for (int i = 0; i < data1.Length; i++) { Console.Write(data1[i]+" "); }
+        for (int i = 0; i < data1.Length; i++) { Console.Write(data1[i]+""); }
         StatistikAusgeben(Console.Out, stat);
         Console.ReadLine();
 
@@ -60,7 +60,7 @@ internal class Program
         Statistik s =new Statistik();
         double max = data[0].Wert;
         double min = data[0].Wert;
-        double summe = 0;
+        double summe = data[0].Wert;
 
         for (int i = 1; i < data.Length; i++)
         {
@@ -74,22 +74,22 @@ internal class Program
             }
             summe += data[i].Wert;
         }
-
+        double MW= summe / data.Length;
         s.Maximun = max;
         s.Minimun = min;
-        s.Mittelwert = summe / data.Length;
+        s.Mittelwert = MW;
         s.Anzahl = data.Length;
         return s;
 
     }
     private static  Value []  ValueArrGen()
     {   Random rnd = new Random();
-        Value [] v = new Value[rnd.Next(0,11)];
+        Value [] v = new Value[rnd.Next(1,11)];
         Value v1= new Value();
         for(int i = 0;i< v.Length; i++)
         {
             try {
-                v[i] = new Value(i, rnd.Next(0,100));
+                v[i] = new Value(i, rnd.Next(1,100));
             }
             catch (Exception ex) { }
         }
@@ -135,7 +135,8 @@ internal class Program
             return $"Anzahl= {Anzahl}\n" +
                    $"Maximum= {Maximun.ToString("F2")}\n" +
                    $"Minimum= {Minimun.ToString("F2")}\n" +
-                   $"Mittelwert= {Mittelwert.ToString("F2")}\n";
+                   $"Mittelwert= {Mittelwert.ToString("F2")}\n" +
+                   $"";
         }
        
     }
@@ -152,9 +153,8 @@ internal class Program
             Timestamp = DateTime.Now;
         }
         public override string ToString() {
-            return $"Seonsor Id= {SensorId}\n" +
-                   $"Wert= {Wert}\n" +
-                   $"Time Stamp= {Timestamp}";
+            return "Seonsor Id= "+SensorId+ " "+ "Wert= "+Wert+" " +  "Time Stamp= "+Timestamp+ "\n";
+                   
         }
     }
 }
